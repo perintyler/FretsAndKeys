@@ -17,3 +17,23 @@ body {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+.note-label-container {
+  display: block;
+  white-space: nowrap;
+  padding-bottom: 3px;
+  padding-left: 1px;
+  width: 90%;
+}
+
+.note-label-octave { 
+  position: relative; 
+  bottom: -3px;
+  left: -4px;
+  font-size: 0.05em; 
+}
+
+.note-label-name {
+  font-size: 0.7em;
+  bottom: 2px;
+}
