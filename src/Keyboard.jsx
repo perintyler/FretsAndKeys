@@ -14,3 +14,21 @@ function NoteLabel({ midiNumber, color })
     </div>
   );
 }
+
+export default function Keyboard() 
+{
+  const firstNote = MidiNumbers.fromNote('a0');
+  const lastNote = MidiNumbers.fromNote('C8');
+
+  return (
+    <Piano
+      noteRange={{ first: firstNote, last: lastNote }}
+      playNote={(midiNumber) => {}}
+      stopNote={(midiNumber) => {}}
+      renderNoteLabel={({ keyboardShortcut, midiNumber, isActive, isAccidental }) => {
+        let color = isBlackKey(midiNumber) ? "white" : "black";
+        return <NoteLabel midiNumber={midiNumber} color={color}></NoteLabel>;
+      }}
+    />
+  );
+}
