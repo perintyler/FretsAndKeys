@@ -2,8 +2,12 @@
 
 import 'react-piano/dist/styles.css';
 
+import { useState } from 'react';
 import { Piano, MidiNumbers } from 'react-piano';
 import { getPitchName, getOctaveNumber, isBlackKey } from './notes_api';
+
+const FIRST_KEYBOARD_NOTE = MidiNumbers.fromNote('a0');
+const LAST_KEYBOARD_NOTE = MidiNumbers.fromNote('C8');
 
 function NoteLabel({ midiNumber, color }) 
 {
@@ -17,14 +21,23 @@ function NoteLabel({ midiNumber, color })
 
 export default function Keyboard() 
 {
-  const firstNote = MidiNumbers.fromNote('a0');
-  const lastNote = MidiNumbers.fromNote('C8');
+  var [selectedNotes, setSelectedNotes] = useState([]);
+
+  function updateSelectedNotes(midiNumber) {
+
+    if (selectedNotes.includes(midiNumber)) {
+      setSelectedNotes(selectedNotes.filter((alreadySelectedMidiNumber) => midiNumber !== alreadySelectedMidiNumber));
+    } else {
+      setSelectedNotes([...selectedNotes, midiNumber]);
+    }
+  }
 
   return (
     <Piano
-      noteRange={{ first: firstNote, last: lastNote }}
-      playNote={(midiNumber) => {}}
+      noteRange={{ first: FIRST_KEYBOARD_NOTE, last: LAST_KEYBOARD_NOTE }}
       stopNote={(midiNumber) => {}}
+      playNote={(midiNumber) => {}}
+      onPlayNoteInput={(midiNumber) => {updateSelectedNotes(midiNumber)}}
       renderNoteLabel={({ keyboardShortcut, midiNumber, isActive, isAccidental }) => {
         let color = isBlackKey(midiNumber) ? "white" : "black";
         return <NoteLabel midiNumber={midiNumber} color={color}></NoteLabel>;
