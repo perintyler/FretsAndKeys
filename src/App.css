@@ -18,6 +18,16 @@ body {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
+#keyboard-container {
+  width: 100%;
+  height: 80px;
+}
+
+
+#guitar-container {
+  margin: 0px;
+}
+
 .note-label-container {
   display: block;
   white-space: nowrap;
