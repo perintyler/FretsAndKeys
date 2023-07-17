@@ -12,6 +12,9 @@ function App() {
       <div id="guitar-container">
         <Guitar></Guitar>
       </div>
+      <div id="keyboard-container">
+        <Keyboard></Keyboard>
+      </div>
     </div>
   );
 
