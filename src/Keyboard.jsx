@@ -12,7 +12,7 @@ const LAST_KEYBOARD_NOTE = MidiNumbers.fromNote('C8');
 function NoteLabel({ midiNumber, color }) 
 {
   return (
-    <div style={{"color": color}} className="note-label-container unselectable-text">
+    <div style={{"color": color}} className="note-label-container unselectable-text" data-testid="note-label">
       <span className="note-label-name">{getPitchName(midiNumber)}</span> 
       <span className="note-label-octave"> {getOctaveNumber(midiNumber)} </span>
     </div>
@@ -24,6 +24,7 @@ export default function Keyboard()
   var [selectedNotes, setSelectedNotes] = useState([]);
 
   function updateSelectedNotes(midiNumber) {
+    console.log('piano selected notes', selectedNotes);
 
     if (selectedNotes.includes(midiNumber)) {
       setSelectedNotes(selectedNotes.filter((alreadySelectedMidiNumber) => midiNumber !== alreadySelectedMidiNumber));
