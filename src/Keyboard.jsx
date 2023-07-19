@@ -2,12 +2,21 @@
 
 import 'react-piano/dist/styles.css';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Piano, MidiNumbers } from 'react-piano';
 import { getPitchName, getOctaveNumber, isBlackKey } from './notes_api';
 
+const KEY_HEIGHT = 80; // pixels
+
+const KEYBOARD_CONTAINER_WIDTH_PERCENTAGE = 0.9; // 90% of window
+
 const FIRST_KEYBOARD_NOTE = MidiNumbers.fromNote('E2');
-const LAST_KEYBOARD_NOTE = MidiNumbers.fromNote('C6'); // last note on a piano is C8
+
+function getWindowWidth() 
+{
+  const { innerWidth: width, innerHeight: height } = window;
+  return width;
+}
 
 function NoteLabel({ midiNumber, color })
 {
@@ -23,8 +32,9 @@ function KeyCover({ midiNumber, keyIsSelected })
 {
   let style = {width: '100%', height: '100%'};
   if (keyIsSelected) {
-    style.backgroundColor = 'red';
-    style.borderRadius = '0 0 5px 5px';
+    style.backgroundColor = 'var(--tomato)';
+    let borderRadius = isBlackKey(midiNumber) ? 3 : 5;
+    style.borderRadius = `0 0 ${borderRadius}px ${borderRadius}px`;
   }
 
   return (
@@ -39,9 +49,30 @@ function KeyCover({ midiNumber, keyIsSelected })
 
 export default function Keyboard({ selectedNotes, updateSelectedNotes }) 
 {
+  const [windowWidth, setWindowWidth] = useState(getWindowWidth());
+
+  useEffect(() => 
+  {
+    function handleResize() {
+      setWindowWidth(getWindowWidth());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const keyWidthToHeightRatio = windowWidth < 500 ? 0.15 : 0.22;
+  const keyWidth = KEY_HEIGHT*keyWidthToHeightRatio;
+  let componentWidth = windowWidth*KEYBOARD_CONTAINER_WIDTH_PERCENTAGE;
+  let numKeys = Math.floor(componentWidth / keyWidth);
+  var lastNote = Math.min(
+    MidiNumbers.fromNote('A5'),
+    FIRST_KEYBOARD_NOTE + numKeys
+  );
+
   return (
     <Piano
-      noteRange={{ first: FIRST_KEYBOARD_NOTE, last: LAST_KEYBOARD_NOTE }}
+      noteRange={{first: FIRST_KEYBOARD_NOTE, last: lastNote}}
       stopNote={(midiNumber) => {}}
       playNote={(midiNumber) => {}}
       onPlayNoteInput={(midiNumber) => {updateSelectedNotes(midiNumber)}}
@@ -49,7 +80,7 @@ export default function Keyboard({ selectedNotes, updateSelectedNotes })
         return (
           <KeyCover 
             midiNumber={midiNumber}
-            keyWidthToHeight={0.5}
+            keyWidthToHeight={keyWidthToHeightRatio}
             keyIsSelected={!isActive && selectedNotes.includes(midiNumber)}
           >
           </KeyCover>
