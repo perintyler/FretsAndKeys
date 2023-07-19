@@ -23,27 +23,35 @@ body {
   height: 80px;
 }
 
-
 #guitar-container {
   margin: 0px;
 }
 
 .note-label-container {
-  display: block;
+  display: flex;
   white-space: nowrap;
   padding-bottom: 3px;
   padding-left: 1px;
   width: 90%;
+  height: 95%;
 }
 
 .note-label-octave { 
   position: relative; 
   bottom: -3px;
-  left: -4px;
+  left: -1px;
   font-size: 0.05em; 
+  align-self: flex-end;
 }
 
 .note-label-name {
   font-size: 0.7em;
   bottom: 2px;
+  align-self: flex-end;
+
+}
+
+.ReactPiano__NoteLabelContainer {
+  height: 100%;
+  margin-top: auto;
 }
