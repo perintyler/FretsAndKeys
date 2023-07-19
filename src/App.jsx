@@ -1,12 +1,12 @@
 /* App.jsx */
 
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Guitar from './Guitar';
 import Keyboard from './Keyboard';
 import { useEffect, useRef, useState } from 'react';
 import {ReactComponent as GithubLogo} from './github-logo.svg';
-
 
 function Instruments()
 {
