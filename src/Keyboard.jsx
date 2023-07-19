@@ -6,10 +6,10 @@ import { useState } from 'react';
 import { Piano, MidiNumbers } from 'react-piano';
 import { getPitchName, getOctaveNumber, isBlackKey } from './notes_api';
 
-const FIRST_KEYBOARD_NOTE = MidiNumbers.fromNote('a0');
-const LAST_KEYBOARD_NOTE = MidiNumbers.fromNote('C8');
+const FIRST_KEYBOARD_NOTE = MidiNumbers.fromNote('E2');
+const LAST_KEYBOARD_NOTE = MidiNumbers.fromNote('C6'); // last note on a piano is C8
 
-function NoteLabel({ midiNumber, color }) 
+function NoteLabel({ midiNumber, color })
 {
   return (
     <div style={{"color": color}} className="note-label-container unselectable-text" data-testid="note-label">
@@ -19,20 +19,26 @@ function NoteLabel({ midiNumber, color })
   );
 }
 
-export default function Keyboard() 
+function KeyCover({ midiNumber, keyIsSelected })
 {
-  var [selectedNotes, setSelectedNotes] = useState([]);
-
-  function updateSelectedNotes(midiNumber) {
-    console.log('piano selected notes', selectedNotes);
-
-    if (selectedNotes.includes(midiNumber)) {
-      setSelectedNotes(selectedNotes.filter((alreadySelectedMidiNumber) => midiNumber !== alreadySelectedMidiNumber));
-    } else {
-      setSelectedNotes([...selectedNotes, midiNumber]);
-    }
+  let style = {width: '100%', height: '100%'};
+  if (keyIsSelected) {
+    style.backgroundColor = 'red';
+    style.borderRadius = '0 0 5px 5px';
   }
 
+  return (
+    <div style={style}>
+        <NoteLabel
+          midiNumber={midiNumber}
+          color={isBlackKey(midiNumber) && !keyIsSelected ? "white" : "black"}
+        />
+    </div>
+  );
+}
+
+export default function Keyboard({ selectedNotes, updateSelectedNotes }) 
+{
   return (
     <Piano
       noteRange={{ first: FIRST_KEYBOARD_NOTE, last: LAST_KEYBOARD_NOTE }}
@@ -40,8 +46,14 @@ export default function Keyboard()
       playNote={(midiNumber) => {}}
       onPlayNoteInput={(midiNumber) => {updateSelectedNotes(midiNumber)}}
       renderNoteLabel={({ keyboardShortcut, midiNumber, isActive, isAccidental }) => {
-        let color = isBlackKey(midiNumber) ? "white" : "black";
-        return <NoteLabel midiNumber={midiNumber} color={color}></NoteLabel>;
+        return (
+          <KeyCover 
+            midiNumber={midiNumber}
+            keyWidthToHeight={0.5}
+            keyIsSelected={!isActive && selectedNotes.includes(midiNumber)}
+          >
+          </KeyCover>
+        );
       }}
     />
   );
