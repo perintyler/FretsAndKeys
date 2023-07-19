@@ -7,6 +7,7 @@ import Guitar from './Guitar';
 import Keyboard from './Keyboard';
 import { useEffect, useRef, useState } from 'react';
 import {ReactComponent as GithubLogo} from './github-logo.svg';
+import Button from 'react-bootstrap/Button';
 
 function Instruments()
 {
@@ -42,6 +43,7 @@ function Instruments()
     <div>
       <div id="guitar-container">{guitar}</div>
       <div id="keyboard-container">{keyboard}</div>
+      <Button onClick={()=>setSelectedNotes([])} className="center" id="clear-notes-button">Clear</Button>
     </div>
   );
 }
