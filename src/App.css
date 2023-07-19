@@ -1,11 +1,62 @@
 
+:root {
+  --night: #0c090dff;
+  --amaranth: #e01a4fff;
+  --tomato: #f15946ff;
+  --saffron: #f9c22eff;
+  --moonstone: #53b3cbff;
+  --deftblue: #3D405B;
+  --charcoal: #404E5C;
+  --mintcream: #F4FFFD;
+  --onyx: #424242;
+  --raisinblack: #272838;
+  --eerieblack: #1B2021;
+  --emerald: #2DD881;
+  --keppel: #4EA699;
+  --redcrayola: #EE4266;
+  --verdigris: #3CBBB1;
+  --carrotorange: #EA9010;
+  --aureolin: #F7E733;
+  --mimipink: #F2CEE6;
+  --plum: #F9B9F2;
+}
+
+html {
+  -webkit-tap-highlight-color:transparent;
+}
+
 body {
-  margin: 8px;
+  background-color: var(--eerieblack);
+}
+
+h1 {
+  margin: 0;
 }
 
 #App {
   width: 100%;
   height: 100%;
+}
+
+#header {
+  background-color: var(--redcrayola);
+  width: 100%;
+  height: 80px;
+  border-bottom: 2px solid var(--saffron);
+}
+
+#header ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+#header ul li {
+  display: block;
+  list-style: none;
+  display: inline-block;
 }
 
 .unselectable-text {
@@ -18,18 +69,31 @@ body {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #keyboard-container {
-  width: 100%;
+  width: 92%;
   height: 80px;
+  margin-left: 4%;
+  margin-right: 4%;
 }
 
 #guitar-container {
   margin: 0px;
 }
 
+#clear-notes-button {
+  width: 200px;
+  margin-top: 20px;
+}
+
 .note-label-container {
   display: flex;
-  white-space: nowrap;
+/*  white-space: nowrap;*/
   padding-bottom: 3px;
   padding-left: 1px;
   width: 90%;
@@ -38,14 +102,14 @@ body {
 
 .note-label-octave { 
   position: relative; 
-  bottom: -3px;
+  bottom: -2px;
   left: -1px;
-  font-size: 0.05em; 
+  font-size: 0.35rem; 
   align-self: flex-end;
 }
 
 .note-label-name {
-  font-size: 0.7em;
+  font-size: 0.5rem;
   bottom: 2px;
   align-self: flex-end;
 
@@ -54,4 +118,20 @@ body {
 .ReactPiano__NoteLabelContainer {
   height: 100%;
   margin-top: auto;
+}
+
+.ReactPiano__Key {
+  user-select: none;
+}
+
+.ReactPiano__Key--natural {
+  background: var(--mintcream) !important;  /* Change the default active key color to bright red */
+}
+ 
+.ReactPiano__Key--accidental {
+  background: var(--night) !important;  /* Change accidental keys to be completely black */
+}
+
+.ReactPiano__Key--active {
+  background: var(--emerald) !important;
 }
