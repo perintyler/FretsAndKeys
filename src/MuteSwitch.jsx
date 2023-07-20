@@ -15,7 +15,7 @@ export default function MuteSwitch({ onChange })
   }
 
   return (
-    <div className="mute-switch-container">
+    <div className="horizontal-row">
       <div>
         Sound Off
         <SoundOffIcon className="mute-icon"/>
