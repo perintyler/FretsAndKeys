@@ -79,6 +79,15 @@ h1 {
   margin-right: auto;
 }
 
+.horizontal-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.horizontal-row * {
+  margin: 2px;
+}
+
 #keyboard-container {
   width: 94%;
   height: 80px;
