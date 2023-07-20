@@ -143,3 +143,8 @@ test('isBlackKey', () =>
   expect(isBlackKey(91)).toBe(false); // G6
   expect(isBlackKey(92)).toBe(true); // G#6
 });
+
+test('getPitches', () => 
+{
+  expect(getPitches()).toBe(["C", "C#", "D", "D#", "E", "F", "G#", "G", "G#", "A", "A#", "B"]);
+});
