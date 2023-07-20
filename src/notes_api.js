@@ -63,3 +63,8 @@ export function getMidiNumberFromFretAndString(fret, string)
 {
     return MIDI_NUMBER_OF_FIRST_FRET + fret + 5*(NUMBER_OF_STRINGS-string);
 }
+
+export function getPitches()
+{
+  return PITCH_NAMES.map(name => name.toUpperCase());
+}
