@@ -3,44 +3,33 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import { useEffect, useRef, useState } from 'react';
+
 import Guitar from './Guitar';
 import Keyboard from './Keyboard';
-import { useEffect, useRef, useState } from 'react';
-import {ReactComponent as GithubLogo} from './svg/github-logo.svg';
-import {ReactComponent as MuteIcon} from './svg/mute-icon.svg';
-import {ReactComponent as UnmuteIcon} from './svg/unmute-icon.svg';
+import HeaderBar from './HeaderBar';
+import MuteSwitch from './MuteSwitch';
+import ScaleSelection from './ScaleSelection';
+import DetectedChordsList from './DetectedChordsList';
 
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import { getNoteAsText, getMidiNumber, getPitchName } from './notes_api';
+import { Chord, Scale } from "tonal";
 
 import Button from 'react-bootstrap/Button';
-import { getNoteAsText, getPitches, getMidiNumber, getPitchName } from './notes_api';
 
-import * as Tone from 'tone'
-
-import { Chord, Scale, ScaleType } from "tonal";
+import * as Tone from 'tone'; // can i use modern import for this
 
 const synth = new Tone.Synth().toDestination();
 
-const SCALE_NAMES = ScaleType.names();
-
-function ScaleSelection({ showScale })
+function ClearNotesButton({ onClick })
 {
-  var [selectedRootNote, setSelectedRootNote] = useState(getPitches()[0]);
-  var [selectedScale, setSelectedScale] = useState(ScaleType.names()[0]);
-
-  function updateRootNote(key) { setSelectedRootNote(getPitches()[key])}
-  function updateScale(key) { setSelectedScale(ScaleType.names()[key])}
-
-  let rootNoteDropdownOptions = getPitches().map((pitch, i) => <Dropdown.Item eventKey={i}>{pitch}</Dropdown.Item>);
-  let scaleDropdownOptions = ScaleType.names().map((scale, i) => <Dropdown.Item eventKey={i}>{scale}</Dropdown.Item>);
-
   return (
-    <div>
-      <Button onClick={()=>{showScale(selectedRootNote, selectedScale)}}>Show Scale</Button>
-      <DropdownButton onSelect={(key, event)=>{updateRootNote(key)}} id="dropdown-basic-button" title={`Root Note: ${selectedRootNote}`}>{rootNoteDropdownOptions}</DropdownButton>
-      <DropdownButton onSelect={(key, event)=>{updateScale(key)}} id="dropdown-basic-button" title={`Scale Type: ${selectedScale}`}>{scaleDropdownOptions}</DropdownButton>
-    </div>
+    <Button 
+      onClick={()=>onClick()} 
+      className="center" 
+      id="clear-notes-button"
+      children="Clear Notes"
+    />
   );
 }
 
@@ -51,17 +40,15 @@ function Instruments()
 
   function updateSelectedNotes(midiNumber) {
     var filteredNotes = selectedNotes.filter((selected) => midiNumber !== selected);
-
     if (selectedNotes.length !== filteredNotes.length) { 
-      // unselect note
+      // deselect a previously selected note
       setSelectedNotes(filteredNotes);
     } else { 
-      // select note
-      setSelectedNotes(selectedNotes.concat([midiNumber]));
-
+      // select a new note
       if (!isMuted) {
-        synth.triggerAttackRelease(getNoteAsText(midiNumber), "8n", Tone.now());
+        synth.triggerAttackRelease(getNoteAsText(midiNumber), "8n");
       }
+      setSelectedNotes(selectedNotes.concat([midiNumber]));
     }
   }
 
@@ -87,48 +74,28 @@ function Instruments()
     />
   );
 
-  var clearButton = (
-    <Button 
-      onClick={()=>setSelectedNotes([])} 
-      className="center" 
-      id="clear-notes-button"
-      children="Clear"
-    />
-  );
+  var clearButton = <ClearNotesButton onClick={()=>setSelectedNotes([])} />;
 
-  var muteButton = (
-    <div onClick={()=>setIsMuted(!isMuted)} id="mute-button">
-      {isMuted ? <UnmuteIcon /> : <MuteIcon/>}
-    </div>
-  );
+  var muteButton = <MuteSwitch onChange={() => setIsMuted(!isMuted)} />
 
   var scaleSelection = <ScaleSelection showScale={showScale} />;
 
-  let chords = Chord.detect(selectedNotes.map(getPitchName));
-  let chordsString = chords.length > 0 ? chords.join(', ') : "N/A";
-  var currentChord = <div><h3>Detected Chords: {chordsString}</h3></div>;
+  var chordList = <DetectedChordsList notes={selectedNotes} />;
 
   return (
     <div id="instruments-container">
+      <div>
+        <ClearNotesButton onClick={()=>setSelectedNotes([])} />
+        <MuteSwitch onChange={() => setIsMuted(!isMuted)} />
+      </div>
+
       <div id="guitar-container">{guitar}</div>
       <div id="keyboard-container">{keyboard}</div>
-      <div style={{textAlign: "center", paddingTop: '20px'}}>{currentChord}</div>
-      <div>{clearButton}{muteButton}{scaleSelection}</div>
+
+      <DetectedChordsList notes={selectedNotes} />
+      <div>{scaleSelection}</div>
     </div>
   );
-}
-
-function HeaderBar()
-{
-  return (
-    <div id="header">
-      <ul>
-        <li><h1>FretsAndKeys.xyz</h1></li>
-        <li><GithubLogo style={{textColor: 'black'}} /></li>
-      </ul>
-    </div>
-
-  )
 }
 
 function App() {

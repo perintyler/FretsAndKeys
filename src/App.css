@@ -100,6 +100,17 @@ h1 {
   height: 50px;
 }
 
+.mute-switch-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.mute-icon {
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+}
+
 .note-label-container {
   display: flex;
 /*  white-space: nowrap;*/

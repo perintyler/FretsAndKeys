@@ -73,9 +73,9 @@ export default function Keyboard({ selectedNotes, updateSelectedNotes })
   return (
     <Piano
       noteRange={{first: FIRST_KEYBOARD_NOTE, last: lastNote}}
-      stopNote={(midiNumber) => {}}
-      playNote={(midiNumber) => {}}
-      onPlayNoteInput={(midiNumber) => {updateSelectedNotes(midiNumber)}}
+      stopNote={midiNumber => {}}
+      playNote={midiNumber => updateSelectedNotes(midiNumber)}
+      onPlayNoteInput={(midiNumber) => {}}
       renderNoteLabel={({ keyboardShortcut, midiNumber, isActive, isAccidental }) => {
         return (
           <KeyCover 
