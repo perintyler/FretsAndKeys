@@ -14,10 +14,12 @@ const FIRST_KEYBOARD_NOTE = MidiNumbers.fromNote('E2');
 
 function NoteLabel({ midiNumber, color })
 {
+  let noFretLabelIsVisible = midiNumber >= MidiNumbers.fromNote('G#5') && !isBlackKey(midiNumber);
   return (
     <div style={{"color": color}} className="note-label-container unselectable-text" data-testid="note-label">
       <span className="note-label-name">{getPitchName(midiNumber)}</span> 
       <span className="note-label-octave"> {getOctaveNumber(midiNumber)} </span>
+      <span className="note-label-info">{noFretLabelIsVisible ? "no fret" : ""}</span>
     </div>
   );
 }

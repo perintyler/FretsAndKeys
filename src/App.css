@@ -99,7 +99,15 @@ h1 {
   bottom: 2px;
   align-self: flex-end;
   padding-left: 1px;
+}
 
+.note-label-info {
+  font-size: 0.4rem;
+  bottom: 2px;
+  align-self: flex-end;
+  padding-left: 1px;
+  text-align: center;
+  color: var(--charcoal);
 }
 
 .ReactModal__Overlay {
