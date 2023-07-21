@@ -1,3 +1,4 @@
+/* App.css */
 
 :root {
   --night: #0c090dff;
@@ -19,6 +20,11 @@
   --aureolin: #F7E733;
   --mimipink: #F2CEE6;
   --plum: #F9B9F2;
+  --bluewhite: #F2F8FC;
+  --jet: #333333;
+  --lime: #CEFF1A;
+  --savoyblue: #5158BB;
+  --princetonorange: #FE9920;
 }
 
 html {
@@ -33,36 +39,6 @@ h1 {
   margin: 0;
 }
 
-#instruments-container {
-  margin: 5px;
-}
-
-#App {
-  width: 100%;
-  height: 100%;
-}
-
-#header {
-  background-color: var(--redcrayola);
-  width: 100%;
-  height: 58px;
-  border-bottom: 2px solid var(--saffron);
-}
-
-#header ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  width: 100%;
-}
-
-#header ul li {
-  display: block;
-  list-style: none;
-  display: inline-block;
-}
-
 .unselectable-text {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -71,12 +47,6 @@ h1 {
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
-}
-
-.centered {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .centered-text {
@@ -96,58 +66,16 @@ h1 {
   width: 100%;
 }
 
-.standard-margins {
-  margin-left: 2%;
-  margin-right: 2%;
-  width: 94%;
-}
-
-#keyboard-container {
-  width: 94%;
-  height: 80px;
-  margin-left: 2%;
-  margin-right: 2%;
-  margin-bottom: 30px;
-}
-
-#guitar-container {
-  margin: 0px;
-}
-
-#clear-notes-button {
-  width: 100%;
-  height: 50px;
-  margin-top: 20px;
-  background-color: var(--deftblue);
-  border-color: var(--redcrayola);
-}
-
-#show-scale-button {
-  width: 240px;
-  background-color: var(--emerald);
-  margin: 5px;
-}
-
-#mute-button {
-  width: 50px;
-  height: 50px;
-}
-
-#detected-chords-card {
-  width: calc(100% - 295px);
-  height: 180px;
-}
-
-#bottom-section {
-  width: 96%;
-  margin-left: 1%;
-  margin-right: 1%;
-}
-
 .mute-icon {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   padding: 5px;
+  margin: 0;
+}
+
+.form-switch {
+  padding: 0;
+  margin: 0;
 }
 
 .note-label-container {
@@ -174,6 +102,10 @@ h1 {
 
 }
 
+.ReactModal__Overlay {
+  z-index: 100 !important;
+}
+
 .ReactPiano__NoteLabelContainer {
   height: 100%;
   margin-top: auto;
@@ -184,13 +116,200 @@ h1 {
 }
 
 .ReactPiano__Key--natural {
-  background: var(--mintcream) !important;  /* Change the default active key color to bright red */
+  background: var(--mintcream) !important;
 }
  
 .ReactPiano__Key--accidental {
-  background: var(--night) !important;  /* Change accidental keys to be completely black */
+  background: var(--night) !important;
 }
 
 .ReactPiano__Key--active {
   background: var(--emerald) !important;
+}
+
+#App {
+  width: 100%;
+  height: 100%;
+}
+
+#header {
+  background-color: var(--redcrayola);
+  width: 100%;
+  height: 39px;
+  border-bottom: 1px solid var(--charcoal);
+}
+
+#header ul {
+  list-style: none;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  margin-left: 0px;
+  width: calc(100% - 12px);
+}
+
+#header ul li {
+  margin-left: 7px;
+}
+
+#header ul li:last-child {
+  float: right;
+}
+
+#header ul li {
+  display: block;
+  list-style: none;
+  display: inline-block;
+}
+
+#explanation-banner {
+  background-color: var(--bluewhite);
+  color: var(--jet);
+  font-size: 13px;
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: -.005em;
+  font-family: "SF Pro Text","SF Pro Icons","Apple WebExp Icons Custom","Helvetica Neue",Helvetica,Arial,sans-serif;
+  text-align: center;
+  margin: 0;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+#mute-button {
+  font-size: 10px;
+  margin-top: 6px;
+  margin-left: 8px;
+}
+
+#mute-button > div {
+  padding: 0;
+  margin: 0;
+}
+
+#help-message-box {
+  height: 100%;
+  width: 100%;
+  z-index: 100 !important;
+  background-color: white;
+}
+
+#help-message-box-close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+#keyboard-container {
+  width: 94%;
+  height: 100px;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 30px;
+}
+
+#guitar-container {
+  margin: 0px;
+}
+
+#clear-notes-button {
+  width: 100%;
+  height: 50px;
+  margin-top: 10px;
+  background-color: var(--deftblue);
+  border-color: var(--redcrayola);
+}
+
+#scale-selection-card {
+  width:290px;
+  height: 180px;
+}
+
+#show-scale-button {
+  width: 240px;
+  background-color: var(--emerald);
+  margin: 5px;
+}
+
+#scale-selection-inputs {
+  margin-top: 6px;
+}
+
+#scale-selection-inputs > div {
+  display: inline-block;
+  margin-left: 6px;
+}
+
+#detected-chords-card-container {
+  display: inline-block;
+  padding-left: 6px;
+  width: calc(100% - 296px);
+  min-width: 400px;
+  height: 180px;
+}
+
+.dot-circle {
+  r: 13;
+  fill: var(--jet);
+  stroke: var(--emerald);
+}
+
+.dot-text {
+  font-size: 10px;
+  font-weight: bold;
+  fill: white;
+  font-family: "SF Pro Text","SF Pro Icons","Apple WebExp Icons Custom","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.scale-selection-dropdown > button {
+  background-color: #004E89;
+}
+
+@media screen and (max-width: 718px) {
+
+  #bottom-section div {
+    width: 100%;
+  }
+
+  #detected-chords-card-container {
+    margin-top: 12px;
+  }
+
+  #scale-selection-card {
+    height: 190px;
+    padding-right: 13px;
+  }
+
+  #scale-selection-inputs {
+    width: 100%;
+  }
+
+  .scale-selection-dropdown > button {
+    width: 100%;
+    margin-top: 2px;
+  }
+
+  #show-scale-button {
+    width: 100%;
+  }
+
+  .card-body { /* bootstrap card */
+    padding: 10px !important;
+  }
+
+  #explanation-banner {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+#detected-chords-card-container > div {
+  height: 100%;
+  width: 100%;
+}
+
+#bottom-section {
+  width: 96%;
+  margin-left: 1%;
+  margin-right: 1%;
 }
