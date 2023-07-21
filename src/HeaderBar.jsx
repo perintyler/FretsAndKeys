@@ -7,36 +7,16 @@ import { useState } from 'react';
 
 import CloseButton from 'react-bootstrap/CloseButton';
 import Modal from 'react-modal';
+import ReactPlayer from 'react-player'
 
 export default function HeaderBar()
 {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  let helpIcon = <button><HelpIcon style={{width: "45px", height: "45px", paddingRight: "10px"}}/></button>;
-
-  function openModal() {
-    setModalIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // subtitle.style.color = '#f00';
-  }
-
-  function closeModal() {
+  function closeModal() 
+  {
     setModalIsOpen(false);
   }
-
-  var helpMessageModal = (
-    <Modal
-      isOpen={modalIsOpen}
-      onAfterOpen={afterOpenModal}
-      onRequestClose={closeModal}
-      contentLabel="Example Modal"
-    >
-      <CloseButton onClick={closeModal} id="help-message-box-close-button" aria-label="Hide" />
-    </Modal>
-  );
 
   return (
     <div id="header">
@@ -55,7 +35,28 @@ export default function HeaderBar()
             </div>
         </li>
       </ul>
-      {helpMessageModal}
+
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={()=>{}}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal"
+        appElement={document.getElementById("App")}
+        style={{ content: {backgroundColor: "var(--night)"}}}
+      >
+        <>
+          <CloseButton style={{backgroundColor: "white", height: "30px", width: "30px"}} onClick={closeModal} id="help-message-box-close-button" aria-label="Hide" />
+          <div style={{ height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <ReactPlayer
+              style={{ border: "2px solid", borderColor: "var(--emerald)" }}
+              playing={modalIsOpen}
+              url="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" 
+            />
+          </div>
+        </>
+      </Modal>
+
+
     </div>
   )
 }
