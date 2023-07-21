@@ -40,12 +40,13 @@ export default function MuteSwitch({ onChange })
     muteSwithForm = (
       <>
         <span style={{marginRight: "0px"}}>Sound:</span>
-        <Form style={{marginTop: "2px"}}>
+        <Form style={{marginTop: "3px"}}>
           <Form.Switch
             checked={isSwitchOn}
             onChange={()=>handleSwitchChange()}
           />
         </Form>
+        <span style={{color: "gray", fontSize: "8px", paddingTop: "4px", margin: 0}}>(may not work on mobile)</span>
       </>
     );
   } else {
