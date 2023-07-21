@@ -61,14 +61,19 @@ export default function Keyboard({ selectedNotes, updateSelectedNotes })
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const keyWidthToHeightRatio = windowWidth < 500 ? 0.15 : 0.22;
+  const keyWidthToHeightRatio = windowWidth < 500 ? 0.2 : 0.25;
   const keyWidth = KEY_HEIGHT*keyWidthToHeightRatio;
   let componentWidth = windowWidth*KEYBOARD_CONTAINER_WIDTH_PERCENTAGE;
   let numKeys = Math.floor(componentWidth / keyWidth);
+
   var lastNote = Math.min(
-    MidiNumbers.fromNote('A5'),
+    MidiNumbers.fromNote('A7'),
     FIRST_KEYBOARD_NOTE + numKeys
   );
+
+  if (isBlackKey(lastNote)) { // it looks weird when the last note is a black key
+    lastNote -= 1;
+  }
 
   return (
     <Piano
