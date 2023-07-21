@@ -14,9 +14,12 @@ export default function MuteSwitch({ onChange })
     setIsSwitchOn(!isSwitchOn);
   }
 
+  var boldFontStyling = { fontWeight: "bold" };
+  var normalFontStyling = { fontWeight: "normal" };
+
   return (
     <div className="horizontal-row">
-      <div>
+      <div style={isSwitchOn ? normalFontStyling : boldFontStyling}>
         Sound Off
         <SoundOffIcon className="mute-icon"/>
       </div>
@@ -27,7 +30,7 @@ export default function MuteSwitch({ onChange })
           onChange={()=>handleSwitchChange()}
         />
       </Form>
-      <div>
+      <div style={isSwitchOn ? boldFontStyling : normalFontStyling}>
         Sound On
         <SoundOnIcon className="mute-icon"/>
       </div>

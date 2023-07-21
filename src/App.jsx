@@ -24,12 +24,14 @@ const synth = new Tone.Synth().toDestination();
 function ClearNotesButton({ onClick })
 {
   return (
-    <Button 
-      onClick={()=>onClick()} 
-      className="center" 
-      id="clear-notes-button"
-      children="Clear Notes"
-    />
+    <div className="full-width centered-text">
+      <Button 
+        onClick={()=>onClick()} 
+        className="vertical-center" 
+        id="clear-notes-button"
+        children="Clear Notes"
+      />
+    </div>
   );
 }
 
@@ -84,16 +86,16 @@ function Instruments()
 
   return (
     <div id="instruments-container">
-      <div>
-        <ClearNotesButton onClick={()=>setSelectedNotes([])} />
-        <MuteSwitch onChange={() => setIsMuted(!isMuted)} />
-      </div>
-
+      <MuteSwitch onChange={() => setIsMuted(!isMuted)} />
       <div id="guitar-container">{guitar}</div>
       <div id="keyboard-container">{keyboard}</div>
-
-      <DetectedChordsList notes={selectedNotes} />
-      <div>{scaleSelection}</div>
+      <div id="bottom-section">
+        <div className="horizontal-row standard-vertical-margin">
+          <ScaleSelection showScale={showScale} />
+          <DetectedChordsList notes={selectedNotes} />
+        </div>
+        <ClearNotesButton onClick={()=>setSelectedNotes([])} />
+      </div>
     </div>
   );
 }
