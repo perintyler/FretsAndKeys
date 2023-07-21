@@ -1,4 +1,4 @@
-# Frets And Keys
+# Frets & Keys Web App
 
 <p align="center">🎸 ↔️ 🎹</p>
 
