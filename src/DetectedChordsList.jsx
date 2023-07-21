@@ -13,13 +13,12 @@ export default function DetectedChordsList({ notes })
   var cardBody;
   if (chords.length === 0) {
     cardBody = (
-      <div className="centered-text" style={{ paddingTop: "18px" }}>
-        <div>No chords detected</div>
-        <a href="https://en.wikipedia.org/wiki/Chord_(music)">Don't Understand? Click to learn more.</a>
+      <div className="centered-text" style={{ paddingTop: "36px" }}>
+        <h5>No chords detected</h5>
       </div>
     );
   } else {
-    let chordListItems = chords.map(chord => <li>{chord}</li>);
+    let chordListItems = chords.map((chord,i) => <li key={i}>{chord}</li>);
     cardBody = <ul>{ chordListItems }</ul>;
   }
 
