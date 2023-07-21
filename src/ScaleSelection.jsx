@@ -2,11 +2,9 @@
 
 import { useState } from 'react';
 
-import * as Tone from 'tone'; // can i use modern import for this
-
 import { getPitches } from './notes_api';
 
-import { Chord, Scale, ScaleType } from "tonal";
+import { ScaleType } from "tonal";
 
 import Card from 'react-bootstrap/Card';
 

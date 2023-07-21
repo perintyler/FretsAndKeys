@@ -1,8 +1,8 @@
 /* Guitar.jsx */
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Fretboard } from '@moonwave99/fretboard.js';
-import { getMidiNumber, getMidiNumberFromFretAndString, getNoteAsText } from './notes_api'
+import { getMidiNumberFromFretAndString, getNoteAsText } from './notes_api'
 
 const MIDI_NUMBER_TO_STRING_AND_FRET = (function() 
 {
@@ -23,13 +23,6 @@ const MIDI_NUMBER_TO_STRING_AND_FRET = (function()
   }
   return stringAndFretMap;
 })();
-
-function labelFrets()
-{
-  // fretboardRef.current.renderScale({type:"chromatic"}); // render all notes
-  // fretboardRef.current.style({text: ({ note, octave }) => `${note}${octave}`}); // fretboard.js api doesn't support rendering react components in the 'get text' callback
-  // fretboard.style({text: ({ note, octave }) => getMidiNumber(note, octave)}); // fretboard.js api doesn't support rendering react components in the 'get text' callback
-}
 
 function createFretboardJSDotObject(fret, string) 
 {

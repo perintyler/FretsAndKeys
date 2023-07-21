@@ -12,12 +12,6 @@ const KEYBOARD_CONTAINER_WIDTH_PERCENTAGE = 0.9; // 90% of window
 
 const FIRST_KEYBOARD_NOTE = MidiNumbers.fromNote('E2');
 
-function getWindowWidth() 
-{
-  const { innerWidth: width, innerHeight: height } = window;
-  return width;
-}
-
 function NoteLabel({ midiNumber, color })
 {
   return (
@@ -49,14 +43,10 @@ function KeyCover({ midiNumber, keyIsSelected })
 
 export default function Keyboard({ selectedNotes, updateSelectedNotes }) 
 {
-  const [windowWidth, setWindowWidth] = useState(getWindowWidth());
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  useEffect(() => 
-  {
-    function handleResize() {
-      setWindowWidth(getWindowWidth());
-    }
-
+  useEffect(() => {
+    var handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -87,8 +77,7 @@ export default function Keyboard({ selectedNotes, updateSelectedNotes })
             midiNumber={midiNumber}
             keyWidthToHeight={keyWidthToHeightRatio}
             keyIsSelected={!isActive && selectedNotes.includes(midiNumber)}
-          >
-          </KeyCover>
+          />
         );
       }}
     />
