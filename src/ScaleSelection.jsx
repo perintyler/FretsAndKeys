@@ -31,12 +31,12 @@ export default function ScaleSelection({ showScale })
   let scaleDropdownOptions = ScaleType.names().map((scale, i) => <Dropdown.Item key={i} eventKey={i}>{scale}</Dropdown.Item>);
 
   return (
-    <Card style={{width:'290px', height: '180px'}}>
+    <Card id="scale-selection-card">
       <Card.Header>Scale Selection</Card.Header>
       <Card.Body>
-        <div className="horizontal-row full-width">
-          <DropdownButton className="scale-selection-dropdown" onSelect={(key, event)=>{updateRootNote(key)}} id="dropdown-basic-button" title="Root Note">{rootNoteDropdownOptions}</DropdownButton>
-          <DropdownButton className="scale-selection-dropdown" onSelect={(key, event)=>{updateScale(key)}} id="dropdown-basic-button" title="Scale Type">{scaleDropdownOptions}</DropdownButton>
+        <div id="scale-selection-inputs" className="full-width">
+          <DropdownButton className="scale-selection-dropdown" onSelect={(key, event)=>{updateRootNote(key)}} title="Root Note">{rootNoteDropdownOptions}</DropdownButton>
+          <DropdownButton className="scale-selection-dropdown" onSelect={(key, event)=>{updateScale(key)}} title="Scale Type">{scaleDropdownOptions}</DropdownButton>
         </div>
         <Button id="show-scale-button" onClick={()=>{showScale(selectedRootNote, selectedScale)}}>Show Scale</Button>
       </Card.Body>
