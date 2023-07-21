@@ -21,8 +21,6 @@ import * as Tone from 'tone'; // can i use modern import for this
 
 const synth = new Tone.Synth().toDestination();
 
-const LAST_NOTE = getMidiNumber("G#", 5); // last fret on the fretboard
-
 function ExplanationBox() {
   return (
     <div id="explanation-banner">
@@ -51,16 +49,14 @@ export default function App()
 
   function updateSelectedNotes(midiNumber) 
   {
-    if (midiNumber <= LAST_NOTE) {
-      var filteredNotes = selectedNotes.filter((selected) => midiNumber !== selected);
-      if (selectedNotes.length !== filteredNotes.length) { // deselect a previously selected note
-        setSelectedNotes(filteredNotes);
-      } else { // select a new note
-        if (!isMuted) {
-          synth.triggerAttackRelease(getNoteAsText(midiNumber), "8n");
-        }
-        setSelectedNotes(selectedNotes.concat([midiNumber]));
+    var filteredNotes = selectedNotes.filter((selected) => midiNumber !== selected);
+    if (selectedNotes.length !== filteredNotes.length) { // deselect a previously selected note
+      setSelectedNotes(filteredNotes);
+    } else { // select a new note
+      if (!isMuted) {
+        synth.triggerAttackRelease(getNoteAsText(midiNumber), "8n");
       }
+      setSelectedNotes(selectedNotes.concat([midiNumber]));
     }
   }
 
