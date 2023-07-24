@@ -43,6 +43,8 @@ function createFretboard()
     fretColor: 'black',
     dotFill: 'white',
     scaleFrets: true,
+    leftPadding: true,
+    rightPadding: true,
     dotText: ({ note }) => note,
     dotStrokeColor: ({ moving }) => 'black',
   });
