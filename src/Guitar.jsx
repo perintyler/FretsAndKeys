@@ -42,6 +42,7 @@ function createFretboard()
     el: '#fretboard',
     fretColor: 'black',
     dotFill: 'white',
+    scaleFrets: true,
     dotText: ({ note }) => note,
     dotStrokeColor: ({ moving }) => 'black',
   });
