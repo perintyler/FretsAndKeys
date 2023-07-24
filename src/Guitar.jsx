@@ -84,5 +84,23 @@ export default function Guitar({ selectedNotes, updateSelectedNotes })
       };
   });
 
-  return <figure id="fretboard"></figure>;
+  return (
+    <div id="fretboard-container">
+      <div id="open-string-dots-outer-container">
+        <div id="open-string-dots-inner-container">
+          <div className="open-string-dot" />
+          <div className="open-string-dot" />
+          <div className="open-string-dot" />
+          <div className="open-string-dot" />
+          <div className="open-string-dot" />
+          <div className="open-string-dot" />
+        </div>
+      </div>
+      <div id="strings-and-frets-outer-container">
+        <div id="strings-and-frets-inner-container">
+          <figure id="fretboard"></figure>
+        </div>
+      </div>
+    </div>
+  );
 }
