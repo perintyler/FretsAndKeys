@@ -61,7 +61,11 @@ export function getMidiNumber(noteName, octaveNumber)
 
 export function getMidiNumberFromFretAndString(fret, string)
 {
-    return MIDI_NUMBER_OF_FIRST_FRET + fret + 5*(NUMBER_OF_STRINGS-string);
+  let midiNumberOfOpenString = MIDI_NUMBER_OF_FIRST_FRET
+                             + 5*(NUMBER_OF_STRINGS-string) // every open string is 5 pitches away from the other
+                             - (string <= 2 ? 1 : 0);       // except the 2nd and 3rd string, which are 4 pitches 
+                                                            // away from eachother
+  return midiNumberOfOpenString + fret;
 }
 
 export function getPitches()
