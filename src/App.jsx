@@ -17,9 +17,22 @@ import { Scale } from "tonal";
 
 import Button from 'react-bootstrap/Button';
 
-import * as Tone from 'tone'; // can i use modern import for this
+import { Synth, PolySynth } from 'tone'
 
-const synth = new Tone.Synth().toDestination();
+var synth;
+try {
+  synth = new PolySynth(Synth).toDestination();
+} catch (e) {
+  synth = null;
+  if (!(e instanceof ReferenceError)) {
+    console.error('unexpected error when loading synth');
+  }
+}
+
+function doesAudioContextExist()
+{
+  return synth !== null;
+}
 
 function ExplanationBox() {
   return (
@@ -53,7 +66,7 @@ export default function App()
     if (selectedNotes.length !== filteredNotes.length) { // deselect a previously selected note
       setSelectedNotes(filteredNotes);
     } else { // select a new note
-      if (!isMuted) {
+      if (doesAudioContextExist() && !isMuted) {
         synth.triggerAttackRelease(getNoteAsText(midiNumber), "8n");
       }
       setSelectedNotes(selectedNotes.concat([midiNumber]));
