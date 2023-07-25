@@ -6,7 +6,8 @@ import {
   getNoteAsText,
   getMidiNumber, 
   getMidiNumberFromFretAndString, 
-  isBlackKey
+  isBlackKey,
+  getPitches
 } from './notes_api';
 
 test('getPitchName', () => 
@@ -146,5 +147,5 @@ test('isBlackKey', () =>
 
 test('getPitches', () => 
 {
-  expect(getPitches()).toBe(["C", "C#", "D", "D#", "E", "F", "G#", "G", "G#", "A", "A#", "B"]);
+  expect(getPitches()).toStrictEqual(["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]);
 });
