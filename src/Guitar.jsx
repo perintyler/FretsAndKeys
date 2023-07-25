@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { Fretboard } from '@moonwave99/fretboard.js';
+import { GUITAR_TUNINGS } from '@moonwave99/fretboard.js';
 import { getMidiNumberFromFretAndString, getNoteAsText } from './notes_api'
 
 const MIDI_NUMBER_TO_STRING_AND_FRET = (function() 
@@ -43,8 +44,7 @@ function createFretboard()
     fretColor: 'black',
     dotFill: 'white',
     scaleFrets: true,
-    leftPadding: true,
-    rightPadding: true,
+    tuning: GUITAR_TUNINGS.default,
     dotText: ({ note }) => note,
     dotStrokeColor: ({ moving }) => 'black',
   });
@@ -67,15 +67,14 @@ export default function Guitar({ selectedNotes, updateSelectedNotes })
                                 .map(midiNumber => MIDI_NUMBER_TO_STRING_AND_FRET[midiNumber])
                                 .flat(1)
                                 .map(note => createFretboardJSDotObject(note.fret, note.string));
-        
-        if (true || fretboardRef.current.dots.length !== dots.length) {
+
+        if (fretboardRef.current.dots.length !== dots.length) {
           fretboardRef.current.setDots(dots).render();
         }
       }
 
       fretboardRef.current.on('click', ({ fret, string }) => {
-        let midiNumber = getMidiNumberFromFretAndString(fret, string);
-        updateSelectedNotes(midiNumber);
+        updateSelectedNotes(getMidiNumberFromFretAndString(fret, string));
       });
   
       return function cleanup() {
