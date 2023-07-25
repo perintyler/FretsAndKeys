@@ -6,7 +6,7 @@ import { getPitchName } from './notes_api'
 
 import Card from 'react-bootstrap/Card';
 
-export default function DetectedChordsList({ notes })
+export default function DetectedChordsCard({ notes })
 {
   let chords = Chord.detect(notes.map(getPitchName));
 
