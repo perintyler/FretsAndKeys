@@ -11,23 +11,16 @@ import HeaderBar from './HeaderBar';
 import MuteSwitch from './MuteSwitch';
 import ScaleSelection from './ScaleSelection';
 import DetectedChordsCard from './DetectedChordsCard';
+import DetectedScaleCard from './DetectedScaleCard';
 
 import { getNoteAsText, getMidiNumber } from './notes_api';
+import createSynth from './synth';
+
 import { Scale } from "tonal";
 
 import Button from 'react-bootstrap/Button';
 
-import { Synth, PolySynth } from 'tone'
-
-var synth;
-try {
-  synth = new PolySynth(Synth).toDestination();
-} catch (e) {
-  synth = null;
-  if (!(e instanceof ReferenceError)) {
-    console.error('unexpected error when loading synth');
-  }
-}
+const synth = createSynth();
 
 function doesAudioContextExist()
 {
@@ -108,6 +101,9 @@ export default function App()
             </div>
             <div id="detected-chords-card-container">
               <DetectedChordsCard notes={selectedNotes}/>
+            </div>
+            <div id="detected-scales-card-container">
+              <DetectedScaleCard notes={selectedNotes} />
             </div>
           <ClearNotesButton onClick={()=>setSelectedNotes([])} />
         </div>
