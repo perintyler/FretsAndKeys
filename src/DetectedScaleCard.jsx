@@ -27,7 +27,7 @@ export default function DetectedKeyCard({ notes })
 
   return (
     <Card id="detected-scales-card">
-      <Card.Header>Detected Scales</Card.Header>
+      <Card.Header>Scales</Card.Header>
       <Card.Body>{ cardBody }</Card.Body>
     </Card>
   );
