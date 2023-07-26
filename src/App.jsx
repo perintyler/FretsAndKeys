@@ -10,7 +10,7 @@ import Keyboard from './Keyboard';
 import HeaderBar from './HeaderBar';
 import MuteSwitch from './MuteSwitch';
 import ScaleSelection from './ScaleSelection';
-import DetectedChordsCard from './DetectedChordsCard';
+import ChordsCard from './ChordsCard';
 import ScalesCard from './ScalesCard';
 
 import { getNoteAsText, getMidiNumber } from './notes_api';
@@ -100,10 +100,10 @@ export default function App()
               <ScaleSelection showScale={showScale}/>
             </div>
             <div id="detected-chords-card-container">
-              <DetectedChordsCard notes={selectedNotes}/>
+              <ChordsCard notes={selectedNotes}/>
             </div>
             <div id="detected-scales-card-container">
-              <DetectedScaleCard notes={selectedNotes} />
+              <ScalesCard notes={selectedNotes} />
             </div>
           <ClearNotesButton onClick={()=>setSelectedNotes([])} />
         </div>

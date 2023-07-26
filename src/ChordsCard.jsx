@@ -1,4 +1,4 @@
-/* DetectedChordList.jsx */
+/* ChordsCard.jsx */
 
 import { Chord } from "tonal";
 
