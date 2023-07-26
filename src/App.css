@@ -340,6 +340,14 @@ h1 {
   width: 100%;
 }
 
+#detected-chords-card .list-group-item:first-child {
+  border-top: 0;
+}
+
+#detected-chords-card .list-group-item:last-child {
+  border-bottom: 0;
+}
+
 #bottom-section {
   width: 98%;
   margin-left: 1%;
