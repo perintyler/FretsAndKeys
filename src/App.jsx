@@ -11,7 +11,7 @@ import HeaderBar from './HeaderBar';
 import MuteSwitch from './MuteSwitch';
 import ScaleSelection from './ScaleSelection';
 import DetectedChordsCard from './DetectedChordsCard';
-import DetectedScaleCard from './DetectedScaleCard';
+import ScalesCard from './ScalesCard';
 
 import { getNoteAsText, getMidiNumber } from './notes_api';
 import createSynth from './synth';

@@ -6,7 +6,7 @@ import { Scale } from "tonal";
 
 import Card from 'react-bootstrap/Card';
 
-export default function DetectedKeyCard({ notes })
+export default function ScalesCard({ notes })
 {
   let pitches = notes.map(getNoteAsText);
   let scales = Scale.detect(pitches);
