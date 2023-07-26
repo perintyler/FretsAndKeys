@@ -4,7 +4,8 @@ import {
   getPitchName,
   getOctaveNumber,
   getNoteAsText,
-  getMidiNumber, 
+  getMidiNumber,
+  getMidiNumberFromNote,
   getMidiNumberFromFretAndString, 
   isBlackKey,
   getPitches
@@ -90,6 +91,26 @@ test('getMidiNumber', () =>
   expect(getMidiNumber("G", 3)).toBe(55);
   expect(getMidiNumber("B", 3)).toBe(59);
   expect(getMidiNumber("E", 4)).toBe(64);
+});
+
+test('getMidiNumberFromNote', () =>
+{
+  expect(getMidiNumberFromNote("A0")).toBe(21);
+  expect(getMidiNumberFromNote("A#0")).toBe(22);
+  expect(getMidiNumberFromNote("a#0")).toBe(22);
+  expect(getMidiNumberFromNote("Bb0")).toBe(22);
+  expect(getMidiNumberFromNote("bb0")).toBe(22);
+  expect(getMidiNumberFromNote("B0")).toBe(23);
+  expect(getMidiNumberFromNote("b0")).toBe(23);
+  expect(getMidiNumberFromNote("A1")).toBe(33);
+  expect(getMidiNumberFromNote("C1")).toBe(24);
+  expect(getMidiNumberFromNote("C2")).toBe(36);
+  expect(getMidiNumberFromNote("E2")).toBe(40);
+  expect(getMidiNumberFromNote("A2")).toBe(45);
+  expect(getMidiNumberFromNote("D3")).toBe(50);
+  expect(getMidiNumberFromNote("G3")).toBe(55);
+  expect(getMidiNumberFromNote("B3")).toBe(59);
+  expect(getMidiNumberFromNote("E4")).toBe(64);
 });
 
 test('getMidiNumberFromFretAndString', () => 

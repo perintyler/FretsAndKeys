@@ -10,24 +10,19 @@ import Keyboard from './Keyboard';
 import HeaderBar from './HeaderBar';
 import MuteSwitch from './MuteSwitch';
 import ScaleSelection from './ScaleSelection';
-import DetectedChordsList from './DetectedChordsList';
+import ChordsCard from './ChordsCard';
+import ScalesCard from './ScalesCard';
 
 import { getNoteAsText, getMidiNumber } from './notes_api';
+import createSynth from './synth';
+
 import { Scale } from "tonal";
 
 import Button from 'react-bootstrap/Button';
 
-import { Synth, PolySynth } from 'tone'
+const DEFAULT_TO_SOUND_OFF = true;
 
-var synth;
-try {
-  synth = new PolySynth(Synth).toDestination();
-} catch (e) {
-  synth = null;
-  if (!(e instanceof ReferenceError)) {
-    console.error('unexpected error when loading synth');
-  }
-}
+const synth = createSynth();
 
 function doesAudioContextExist()
 {
@@ -99,7 +94,7 @@ export default function App()
       <HeaderBar />
       <div id="instruments-container">
         <ExplanationBox />
-        <MuteSwitch onChange={() => setIsMuted(!isMuted)} />
+        <MuteSwitch onChange={() => setIsMuted(!isMuted)} onAtStart={ !DEFAULT_TO_SOUND_OFF } />
         <div id="guitar-container">{guitar}</div>
         <div id="keyboard-container">{keyboard}</div>
         <div id="bottom-section">
@@ -107,7 +102,10 @@ export default function App()
               <ScaleSelection showScale={showScale}/>
             </div>
             <div id="detected-chords-card-container">
-              <DetectedChordsList notes={selectedNotes}/>
+              <ChordsCard notes={selectedNotes}/>
+            </div>
+            <div id="detected-scales-card-container">
+              <ScalesCard notes={selectedNotes} />
             </div>
           <ClearNotesButton onClick={()=>setSelectedNotes([])} />
         </div>

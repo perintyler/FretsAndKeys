@@ -5,9 +5,9 @@ import { ReactComponent as SoundOnIcon } from './svg/sound-on-icon.svg';
 import { ReactComponent as SoundOffIcon } from './svg/sound-off-icon.svg';
 import Form from 'react-bootstrap/Form';
 
-export default function MuteSwitch({ onChange })
+export default function MuteSwitch({ onChange, onAtStart })
 {
-  const [isSwitchOn, setIsSwitchOn] = useState(true);
+  const [isSwitchOn, setIsSwitchOn] = useState(onAtStart);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   function handleSwitchChange() {
