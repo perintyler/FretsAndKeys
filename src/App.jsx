@@ -20,6 +20,8 @@ import { Scale } from "tonal";
 
 import Button from 'react-bootstrap/Button';
 
+const DEFAULT_TO_SOUND_OFF = true;
+
 const synth = createSynth();
 
 function doesAudioContextExist()
@@ -92,7 +94,7 @@ export default function App()
       <HeaderBar />
       <div id="instruments-container">
         <ExplanationBox />
-        <MuteSwitch onChange={() => setIsMuted(!isMuted)} />
+        <MuteSwitch onChange={() => setIsMuted(!isMuted)} onAtStart={ !DEFAULT_TO_SOUND_OFF } />
         <div id="guitar-container">{guitar}</div>
         <div id="keyboard-container">{keyboard}</div>
         <div id="bottom-section">
