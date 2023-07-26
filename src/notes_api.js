@@ -89,7 +89,7 @@ export function getMidiNumberFromNote(note)
   let pitch = note.slice(0, note.length-1);
   let octave = note.slice(note.length-1);
 
-  console.assert(isNaN(parseFloat(octave)));
+  console.assert(!isNaN(parseFloat(octave)));
   console.assert(PITCH_NAMES.includes(pitch) || ALTERNATE_PITCH_NAMES.includes(pitch));
 
   return getMidiNumber(pitch, octave);
