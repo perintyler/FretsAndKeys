@@ -9,7 +9,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import ListGroupItem from 'react-bootstrap/ListGroupItem';
 
-export default function DetectedChordsCard({ notes })
+export default function ChordsCard({ notes })
 {
   let chords = Chord.detect(notes.map(getPitchName));
 
@@ -27,7 +27,7 @@ export default function DetectedChordsCard({ notes })
 
   return (
     <Card id="detected-chords-card">
-      <Card.Header>Detected Chords</Card.Header>
+      <Card.Header>Chords</Card.Header>
       <Card.Body>{ cardBody }</Card.Body>
     </Card>
   );
