@@ -36,7 +36,7 @@ function ChordListItem({ chord })
   }
 
   return (
-    <ListGroupItem className="chord-list-item" key={chord}>
+    <ListGroupItem className="chord-list-item">
       <span className="chord-root-note">{rootNote}</span>
       <span className="chord-info">{chordInfo}</span>
       <span className="chord-bass-note">{bassNote ? `/ ${bassNote}` : ""}</span>
@@ -56,7 +56,7 @@ export default function ChordsCard({ notes })
       </div>
     );
   } else {
-    let chordListItems = chords.map(chord => <ChordListItem chord={chord} />);
+    let chordListItems = chords.map(chord => <ChordListItem key={chord} chord={chord} />);
     cardBody = <ListGroup>{ chordListItems }</ListGroup>;
   }
 

@@ -427,8 +427,8 @@ h1 {
     height: fit-content;
   }
 
-  #detected-scales-card {
-    min-height: 180px;
+  #detected-scales-card .card-body > div {
+    min-height: 137px;
   }
 
   #detected-scales-card .card-body {
